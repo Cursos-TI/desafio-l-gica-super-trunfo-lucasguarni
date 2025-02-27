@@ -11,12 +11,12 @@ typedef struct {
 
 // Metodo que calcula a densidade populacional
 float calculatePopulationDensity(int population, float area) {
-    return population / area;
+    return (float)population / area;
 }
 
 // Metodo que calcula o PIB per capita
 float calculatePibPerCapita(int population, float pib) {
-    return pib / population;
+    return (float)pib / population;
 }
 
 // Metodo que calcula o super poder da cidade
@@ -77,58 +77,59 @@ City setCity() {
 }
 
 void verifyPopulation(City *city1, City *city2) {
-    if (city1->population > city2->population) {
-        printf("A carta %s tem a maior população\n", city1->name);
-    } else {
-        printf("A carta %s tem a maior população\n", city2->name);
-    }
+    // Nome da carta com a maior populacao
+    char winnerName[100];
+    strcpy(winnerName, city1->population > city2->population ? city1->name : city2->name);
+    printf("A carta %s tem a maior população\n", winnerName);
+
     city1->comparationPoints += city1->population;
     city2->comparationPoints += city2->population;
 }
 
 void verifyArea(City *city1, City *city2) {
-    if (city1->area > city2->area) {
-        printf("A carta %s tem a maior área\n", city1->name);
-    } else {
-        printf("A carta %s tem a maior área\n", city2->name);
-    }
+    // Nome da carta com a maior area
+    char winnerName[100];
+    strcpy(winnerName, city1->area > city2->area ? city1->name : city2->name);
+    printf("A carta %s tem a maior área\n", winnerName);
+
     city1->comparationPoints += city1->area;
     city2->comparationPoints += city2->area;
 }
 
 void verifyPib(City *city1, City *city2) {
-    if (city1->pib > city2->pib) {
-        printf("A carta %s tem o maior PIB\n", city1->name);
-    } else {
-        printf("A carta %s tem o maior PIB\n", city2->name);
-    }
+    char winnerName[100];
+    // Nome da carta com o maior PIB
+    strcpy(winnerName, city1->pib > city2->pib ? city1->name : city2->name);
+    printf("A carta %s tem o maior PIB\n", winnerName);
+
     city1->comparationPoints += city1->pib;
     city2->comparationPoints += city2->pib;
 }
 
 void verifyTouristAttractions(City *city1, City *city2) {
-    if (city1->touristAttractions > city2->touristAttractions) {
-        printf("A carta %s tem mais pontos turísticos\n", city1->name);
-    } else {
-        printf("A carta %s tem mais pontos turísticos\n", city2->name);
-    }
+    // Nome da carta com mais pontos turisticos
+    char winnerName[100];
+    strcpy(winnerName, city1->touristAttractions > city2->touristAttractions ? city1->name : city2->name);
+    printf("A carta %s tem mais pontos turísticos\n", winnerName);
+
     city1->comparationPoints += city1->touristAttractions;
     city2->comparationPoints += city2->touristAttractions;
 }
 
 void verifyPopulationDensity(City *city1, City *city2) {
-    if (city1->populationDensity < city2->populationDensity) {
-        printf("A carta %s tem a maior densidade populacional\n", city1->name);
-    } else {
-        printf("A carta %s tem a maior densidade populacional\n", city2->name);
-    }
+    // Nome da carta com a menor densidade populacional
+    char winnerName[100];
+    strcpy(winnerName, city1->populationDensity < city2->populationDensity ? city1->name : city2->name);
+    printf("A carta %s tem a menor densidade populacional\n", winnerName);
+
     city1->comparationPoints += city1->populationDensity;
     city2->comparationPoints += city2->populationDensity;
 }
 
 void verifyPibPerCapita(City *city1, City *city2) {
-    // Verifica qual carta tem o maior PIB per capita
-    char winnerName[100] = (city1->pibPerCapita > city2->pibPerCapita) ? city1->name : city2->name;
+    // Nome da carta com o maior PIB per capita
+    char winnerName[100];
+    strcpy(winnerName, city1->pibPerCapita > city2->pibPerCapita ? city1->name : city2->name);
     printf("A carta %s tem o maior PIB per capita\n", winnerName);
 
     city1->comparationPoints += city1->pibPerCapita;
@@ -136,8 +137,9 @@ void verifyPibPerCapita(City *city1, City *city2) {
 }
 
 void verifySuperPower(City *city1, City *city2) {
-    // Verifica qual carta tem o maior super poder
-    char winnerName[100] = (city1->superPower > city2->superPower) ? city1->name : city2->name;
+    // Nome da carta com o maior super poder
+    char winnerName[100];
+    strcpy(winnerName, city1->superPower > city2->superPower ? city1->name : city2->name);
     printf("A carta %s tem o maior super poder\n", winnerName);
 
     city1->comparationPoints += city1->superPower;
@@ -188,7 +190,7 @@ void doComparation(City *city1, City *city2, int comparationOption) {
     }
 }
 
-void getMenu(char title[100]) {
+void getMenu(const char *title) {
     printf("%s\n", title);
     printf("1 - População\n");
     printf("2 - Área\n");
